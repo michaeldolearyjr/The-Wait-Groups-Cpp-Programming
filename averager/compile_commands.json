@@ -1,0 +1,14 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/g++",
+      "-c",
+      "-o",
+      "main",
+      "averager.cpp"
+    ],
+    "directory": "/home/michael/git/Waite Group's C++ Programming/averager",
+    "file": "/home/michael/git/Waite Group's C++ Programming/averager/averager.cpp",
+    "output": "/home/michael/git/Waite Group's C++ Programming/averager/main"
+  }
+]
