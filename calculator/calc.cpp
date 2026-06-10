@@ -1,47 +1,79 @@
 #include <iostream>
+#include <cmath>
+
+/*
+  This program takes two numbers and an operator, 
+  and outputs the calculation.
+*/
 
 int main() {
 
     const char BLANK = ' ';
     const int STOP = 0;
 
-    double x,y,
+
+    double x, y, result,
+    /* Function Prototyping */
     radd(double,double),
     rsub(double,double),
     rmul(double,double),
     rdiv(double,double),
-    rpow(double,double=2);
+    rrem(double,double);
+
+    void showResult(double);
     
     char opr = BLANK;
 
     while (opr != STOP){
         std::cout << "enter an expression:\n";
-        std::cin >> x >> opr >> y;
+        std::cin >> x >> opr;
+
+        if (opr != 'r' && opr !='x' && opr != STOP){
+            std::cin >> y;
+        }
+
+        /* added input sanitation to prevent infinite loops on bad input */
+        if (std::cin.fail()){
+            std::cin.clear();
+            char next_char;
+            while (std::cin.get(next_char)){
+                if (next_char == 'x'){
+                    opr = STOP;
+                    break;
+                }
+                if (next_char == '\n'){
+                    break;
+                }
+            }
+        }
 
         switch (opr){
             case '+':
-                std::cout << "=" << radd(x,y);
+                showResult(radd(x,y));
                 break;
             case '-':
-                std::cout << "=" << rsub(x,y);
+                showResult(rsub(x,y));
                 break;
             case '*':
-                std::cout << "=" << rmul(x,y);
+                showResult(rmul(x,y));
                 break;
             case '/':
-                std::cout << "=" << rdiv(x,y);
+                showResult(rdiv(x,y));
+                break;
+            case 'r':
+                showResult(std::sqrt(x));
                 break;
             case '^':
-                if (y == 2)
-                    std::cout << " = " << rpow(x);
-                else 
-                    std::cout << " = " << rpow(x,y);
+                showResult(std::pow(x,y));
+                break;
+            case '%':
+                showResult(rrem(x,y));
                 break;
             case 'x': // cheap trick x is the 2nd letter in exit.
                 opr = STOP;
                 break;
             default:
-                std::cout << "operator not yet implemented!\n";
+                std::cout <<"ERR: operator not yet implemented!\n";
                 break;
         }
 
@@ -51,6 +83,8 @@ int main() {
     return 0;
 }
 
+
+/* Function Definitions */
 double radd(double a, double b){
     return a+b;
 }
@@ -70,16 +104,10 @@ double rdiv(double a, double b){
     return a/b;
 }
 
-double rpow(double a, double b){
-    double t = 1;
-    
-    if (b == 0)
-        return 1;
-
-    for (double i = 1; i < b; i++){
-        t*=a;
-    }
-
-    return t;
+double rrem(double a, double b){
+    return fmod(a,b);
 }
 
+void showResult(double r){
+    std::cout << '=' << r;
+}
