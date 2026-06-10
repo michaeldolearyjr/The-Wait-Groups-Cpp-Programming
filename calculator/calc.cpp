@@ -2,8 +2,8 @@
 #include <cmath>
 
 /*
-  This program takes two numbers and an operator, 
-  and outputs the calculation.
+  This program takes two numbers separated by an operator, 
+  and outputs the result of the expression.
 */
 
 int main() {
@@ -105,7 +105,7 @@ double rdiv(double a, double b){
 }
 
 double rrem(double a, double b){
-    return fmod(a,b);
+    return std::fmod(a,b);
 }
 
 void showResult(double r){
