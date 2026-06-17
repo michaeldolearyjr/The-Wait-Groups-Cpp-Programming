@@ -20,6 +20,12 @@
     ////////////
 
     b. "pass by reference", as apposed to pass by value, the parameters of a function can use a reference variable instead of a standard variable.
+    c. "inline functions"
+
+    Note: inline functions can improve performance by reducing the overhead of a function call.
+    i.e. it injects the function logic directly "inline" rather than adding the function to the call stack.
+    Using inline functions might be less performant given a large amount of logic in the function block,
+    Modern compilers can handle intelligently adding or removing the inline keyword from functions.
 
 Questions:
 
@@ -33,6 +39,13 @@ Questions:
 Challenges:
 
     1. Add error handling.
+    2. Redefine mean.cpp so that all the functions are inline expanded.
+    3. Redo mean.c using pointer variables in place of the reference parameters.
+    
+    Quiz:
+    1. A reference veriable contains the _alias_ of a memory location and not its _value_.
+    2. A reference variable is commonly used as a function parameter to create a call by _reference_ situation.
+    3. A function that is declared _inline_ is similar to the preprocessor macro command. ( #define )
 
 */
 
@@ -46,7 +59,7 @@ int main(){
     double accum;
     int total;
 
-    double get_value(int&),
+    inline double get_value(int&),
         mean(double, int);
 
     accum = get_value(total);
@@ -63,7 +76,7 @@ int main(){
 
 ////////////////////////////////////////////////
 
-double get_value(int& countReference){
+inline double get_value(int& countReference){
     std::string inputBuffer;   //hold user input
     double accum = 0;
 
@@ -94,7 +107,7 @@ double get_value(int& countReference){
     return accum;
 }
 
-double mean(double accum, int total){ 
+inline double mean(double accum, int total){
     if (total == 0){
         throw std::invalid_argument("error--attempted division by zero");
     }
