@@ -3,6 +3,8 @@
 #include <cstring>
 #include <stdexcept>
 
+using namespace std;
+
 /*
 
  Concepts:
@@ -65,9 +67,9 @@ int main(){
     accum = get_value(total);
     
     try {
-        std::cout << "mean =" << mean(accum, total) << "\n";
-    } catch (const std::invalid_argument& e) {
-        std::cerr << e.what() << "\n";
+        cout << "mean =" << mean(accum, total) << "\n";
+    } catch (const invalid_argument& e) {
+        cerr << e.what() << "\n";
         return ExitCode::GENERIC_ERROR;
     }
 
@@ -84,7 +86,7 @@ inline double get_value(int& countReference){
               << "Enter 'stop' to calculate the mean of the values entered:\n";
 
     for(countReference = 0;;countReference++){ //as countReference is incremented, since it is a reference to total, it permanently updates total without the need to return 
-        if (!(std::cin >> inputBuffer)) {
+        if (!(cin >> inputBuffer)) {
             // Handle unexpected EOF or stream errors
             break;
         }
@@ -94,12 +96,12 @@ inline double get_value(int& countReference){
         
         try {
             // std::stod is safer than std::atof because it throws on invalid inputs
-            accum += std::stod(inputBuffer);
-        } catch (const std::invalid_argument& e) {
-            std::cerr << "Invalid input. Please enter a valid number or 'stop'.\n";
+            accum += stod(inputBuffer);
+        } catch (const invalid_argument& e) {
+            cerr << "Invalid input. Please enter a valid number or 'stop'.\n";
             countReference--; // Don't count this invalid input
-        } catch (const std::out_of_range& e) {
-            std::cerr << "Input number out of range. Please enter a smaller/larger number.\n";
+        } catch (const out_of_range& e) {
+            cerr << "Input number out of range. Please enter a smaller/larger number.\n";
             countReference--; // Don't count this invalid input
         }
     }
@@ -109,7 +111,7 @@ inline double get_value(int& countReference){
 
 inline double mean(double accum, int total){
     if (total == 0){
-        throw std::invalid_argument("error--attempted division by zero");
+        throw invalid_argument("error--attempted division by zero");
     }
 
     return accum / total;

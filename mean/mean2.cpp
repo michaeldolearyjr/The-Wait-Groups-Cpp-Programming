@@ -2,6 +2,8 @@
 #include <cstring>
 #include <cstdlib>
 
+using namespace std;
+
 /*
   Instead of waiting for us to type the numbers into the console, we pass numbers as command line arguments i.e. using the run command: `./mean2 1 2 3 4`
   
@@ -11,21 +13,22 @@
 double mean(double, char*[], int);
 long mean(long, char*[], int);
 
-int main(int argc, char* argv[])
-{
-    if (argc == 1){
-        std::cout << "Enter values on command line\n";
+int main(int len, char* buffer[]) //command line arguments setup. The compiler knows these are command lines by their position in the main function parameters.
+{   
+
+    if (len == 1) {
+        cout << "Enter values on command line\n";
         exit(1);
     }
 
-    if (strchr(argv[1],'.') == 0) {
-        long i = atol(argv[1]);
-        long x = mean(i,argv,argc);
-        std::cout << "mean = " << x << "\n";
+    if (strchr(buffer[1],'.') == 0) {
+        long i = atol(buffer[1]);
+        long x = mean(i, buffer, len);
+        cout << "mean = " << x << "\n";
     } else {
-        double j = atof(argv[1]);
-        double x = mean(j, argv, argc);
-        std::cout << "mean = " << x << "\n";
+        double j = atof(buffer[1]);
+        double x = mean(j, buffer, len);
+        cout << "mean = " << x << "\n";
     }
 
     return 0;
