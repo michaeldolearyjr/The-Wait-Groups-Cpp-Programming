@@ -19,6 +19,13 @@ using namespace std;
  type un-safe, and they don't automatically stop executing. You must pass a count or
  a sentinel value (like a nullptr or 0) so the function knows when it hits the end of the stack.
 
+
+Chapter 2 Quiz
+
+1. A _overloaded_ function uses the same name for two or more similar functions.
+2. A function delcared as example(int ...) indicates a function with a _variable_ number of parameters.
+3. The declaration const char* p produces a _mutable_ pointer variable (that points to a constant value).
+
 */
 
 int main() {
